@@ -23,11 +23,25 @@
   color:white;
 }
 
+.jumbotron h3 {
+  color:white;
+  -webkit-text-stroke-width: .8px;
+  -webkit-text-stroke-color: black
+}
+
 label {
   color:white;
   -webkit-text-stroke-width: .8px;
   -webkit-text-stroke-color: black
 
+}
+
+li {
+  color: white;
+}
+
+.contact {
+  color:white;
 }
 
 .jumbotron{
