@@ -1,3 +1,5 @@
+//BACKEND
+
 function Customer (name,deposit) {
   this.name = name;
   this.initialdeposit = deposit;
@@ -33,24 +35,36 @@ $(document).ready(function() {
     $("ul#customerList").append("<li><span class='contact'>"+newCustomer.name+"</span></li>");
 
     $(".contact").last().click(function(){
+      $(".result").show();
       $("#current").empty();
       $("#current").text(newCustomer.initialdeposit);
       $("#currentName").text(newCustomer.name);
       customer = newCustomer.name;
     });
 
-    $("form#depoWith").submit(function(event){
+    $("input#name").val("");
+    $("input#initial").val("");
+
+    $("form.update").submit(function(event){
+
       event.preventDefault();
       var inputtedDeposit = parseInt($("input#deposit").val());
       var inputtedWithdrawal = parseInt($("input#withdraw").val());
+      if (isNaN(inputtedDeposit) || isNaN(inputtedWithdrawal)) {
+        alert("please enter a good number")
+      } else {
+          if(newCustomer.name === customer) {
+            var newUpdate = new Update(newCustomer.initialdeposit, inputtedDeposit, inputtedWithdrawal);
+            newCustomer.initialdeposit = newUpdate.Total();
+            $("#current").empty();
+            $("#current").text(newCustomer.initialdeposit);
+            $("#currentName").text(newCustomer.name);
+            $("input#deposit").val("0");
+            $("input#withdraw").val("0");
+          };
+      }
 
-      if(newCustomer.name === customer) {
-        var newUpdate = new Update(newCustomer.initialdeposit, inputtedDeposit, inputtedWithdrawal);
-        newCustomer.initialdeposit = newUpdate.Total();
-        $("#current").empty();
-        $("#current").text(newCustomer.initialdeposit);
-        $("#currentName").text(newCustomer.name);
-      };
+
   });
 
 });
